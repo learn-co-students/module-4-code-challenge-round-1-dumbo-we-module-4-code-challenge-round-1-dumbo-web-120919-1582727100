@@ -8,13 +8,17 @@ import SearchBar from './Components/SearchBar'
 
 class App extends React.Component {
 
+  state = {
+    filter: ""
+  }
+
   render(){
     return (
       <div>
         <Header />
-        <SearchBar />
+        <SearchBar onChange={(e) => this.setState({ filter: e.target.value })} />
         <RandomButton/>
-        <PlaneteersContainer />
+        <PlaneteersContainer filter={this.state.filter}/>
       </div>
     );
   }

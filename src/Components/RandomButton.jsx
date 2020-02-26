@@ -1,4 +1,6 @@
 import React from 'react';
+import Planeteer from './Planeteer'
+
 
 const arrayOfPlaneteers = [
   {
@@ -42,9 +44,15 @@ const arrayOfPlaneteers = [
 
 class RandomButton extends React.Component {
 
+  state = {
+    planeteers: []
+  }
+
   handleClick = () => {
     const randomPlaneteer = arrayOfPlaneteers[Math.floor(Math.random() * arrayOfPlaneteers.length)]
-    console.log(randomPlaneteer);
+    this.setState({
+      planeteers: randomPlaneteer
+    })
   }
 
   render() {
@@ -53,6 +61,9 @@ class RandomButton extends React.Component {
         <button onClick={this.handleClick} id="random-planeteer">
           Click to Add a Random Planeteer
         </button>
+        { 
+            <Planeteer planeteer={this.state.planeteers} />
+          }
       </div>
     );
   }
