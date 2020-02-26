@@ -114,6 +114,7 @@ img {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
 }
 
 .card__content {
@@ -172,4 +173,11 @@ img {
   .cards__item{
     width: 50%;
   }
+}
+
+.delete-btn{
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
 }

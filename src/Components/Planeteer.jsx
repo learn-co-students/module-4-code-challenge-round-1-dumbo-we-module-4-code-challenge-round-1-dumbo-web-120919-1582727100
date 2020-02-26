@@ -1,19 +1,40 @@
 import React from 'react';
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 class Planeteer extends React.Component {
 
+  state = {
+    showBio: true
+  }
+
+  toggleBioOrQuote = () => {
+    const current = this.state.showBio;
+    this.setState({
+      showBio: !current
+    })
+  }
+
+  // didn't finish this deliverable!
+  handleDeleteBtnClick = () => {
+    this.props.handleDeletedPlaneteer(this.props.planeteer);
+  }
+
   render() {
+    const { name, fromUSA, born, bio, quote, pictureUrl, twitter } = this.props.planeteer;
+  
     return (
       <li className="cards__item">
         <div className="card">
-          <img src={"RENDER IMAGE"} alt={"RENDER PERSON NAME"} className="card__image" />
+          <button className="delete-btn" onClick={this.handleDeleteBtnClick}>X</button>
+          <img src={pictureUrl} alt={name} className="card__image" />
           <div className="card__content">
-            <div className="card__title">{"RENDER NAME"}</div>
-            <p className="card__text">{"CONDITIONALLY RENDER BIO OR QUOTE"}</p>
+            <div className="card__title">{name}</div>
+            <p className="card__text" onClick={this.toggleBioOrQuote}>{this.state.showBio ? bio : quote}</p>
             <div className="card__detail">
-              <p>{"RENDER TWITTER HANDLE"}</p>
-              <p>Age: {"RENDER THE AGE OF THE PERSON"}</p>
-              <p>{"CONDITIONALLY RENDER WHETHER THE PERSON IS USA-BASED OR WORKING OVERSEAS"}</p>
+              <p>{twitter}</p>
+              <p>Age: {(CURRENT_YEAR - born)}</p>
+              <p>{fromUSA ? "USA-Based" : "Working Overseas"}</p>
             </div>
             {/* DELIVERABLE 5 */}
           </div>
