@@ -26,6 +26,24 @@ class App extends React.Component {
   }
 
   addOnePlaneteer = (randomPlaneteer) => {
+    let formattedData = {
+      name: randomPlaneteer.name,
+      fromUSA: randomPlaneteer.fromUSA,
+      born: randomPlaneteer.born,
+      bio: randomPlaneteer.bio,
+      quote: randomPlaneteer.quote,
+      pictureUrl: randomPlaneteer.pictureUrl,
+      twitter: randomPlaneteer.twitter
+    }
+
+    fetch(http://localhost:4000/planeteers',{
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(formattedData)
+    })
+    .then()
     let newPlaneteer = [...this.state.planeteers, randomPlaneteer]
     this.setState({
       planeteers: newPlaneteer
