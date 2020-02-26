@@ -45,7 +45,7 @@ class Planeteer extends React.Component {
                 { (thisPlaneteer.fromUSA ? "USA-based" : "Working Overseas") }
               </p>
             </div>
-            {/* DELIVERABLE 5 */}
+            <button onClick={() => this.props.handleDeletePlaneteer(thisPlaneteer)}>Delete Planeteer</button>
           </div>
         </div>
       </li>

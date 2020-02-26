@@ -47,6 +47,7 @@ class RandomButton extends React.Component {
     this.props.handleRandomButtonPress(randomPlaneteer)
   }
 
+  // *** RENDER *** 
   render() {
     return (
       <div className="centered">
