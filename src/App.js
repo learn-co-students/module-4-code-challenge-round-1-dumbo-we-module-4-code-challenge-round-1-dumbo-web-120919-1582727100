@@ -33,10 +33,28 @@ class App extends React.Component {
   }
 
   handleRandomButtonClick = (randomPlaneteer) => {
-    console.log(randomPlaneteer)
+    this.persistRandomPlaneteer(randomPlaneteer)
     this.setState({
       randomPlaneteer: randomPlaneteer
     })
+  }
+
+  persistRandomPlaneteer = (randomPlaneteer => {
+    fetch(API + '/planeteers', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(randomPlaneteer)
+    })
+  })
+
+  // didn't finish this deliverable! but it doesn't break it! only console.logs the result
+  handleDeletedPlaneteer = (deletedPlaneteer) => {
+    let planeteers = this.state.planeteers.slice();
+    const idx = planeteers.findIndex((planeteer) => planeteer === deletedPlaneteer)
+    planeteers.splice(idx, 1)
+    console.log(planeteers)
   }
 
   planeteersToRender = () => {
@@ -61,6 +79,7 @@ class App extends React.Component {
         <PlaneteersContainer 
         // if the random button is pressed, add the random planeteer to the planeteers array
         planeteers={this.state.randomPlaneteer ? [...this.planeteersToRender(), this.state.randomPlaneteer] : this.planeteersToRender()}
+        handleDeletedPlaneteer={this.handleDeletedPlaneteer}
         />
       </div>
     );

@@ -9,10 +9,15 @@ class Planeteer extends React.Component {
   }
 
   toggleBioOrQuote = () => {
-    const current = this.state.showBio
+    const current = this.state.showBio;
     this.setState({
       showBio: !current
     })
+  }
+
+  // didn't finish this deliverable!
+  handleDeleteBtnClick = () => {
+    this.props.handleDeletedPlaneteer(this.props.planeteer);
   }
 
   render() {
@@ -21,6 +26,7 @@ class Planeteer extends React.Component {
     return (
       <li className="cards__item">
         <div className="card">
+          <button className="delete-btn" onClick={this.handleDeleteBtnClick}>X</button>
           <img src={pictureUrl} alt={name} className="card__image" />
           <div className="card__content">
             <div className="card__title">{name}</div>
