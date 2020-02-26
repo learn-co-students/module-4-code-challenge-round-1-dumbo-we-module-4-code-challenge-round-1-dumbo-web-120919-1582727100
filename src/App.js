@@ -36,16 +36,17 @@ class App extends React.Component {
     // pass the action up to app from random button component after click event on random button
     // this data needs to be passed down from APP to render on the page
     // fetch(//new planeteer, {
-      method: "POST",
-      headers: {
-        'content-type':'application/json'
-      },
-      body: JSON.stringify(newPlaneteer)
-    }),
+    //   method: "POST",
+    //   headers: {
+    //     'content-type':'application/json'
+    //   },
+    //   body: JSON.stringify(newPlaneteer)
+    // }),
     this.setState({
       planeteersArray: [...this.state.planeteersArray, newPlaneteer]
     })
     // running out of time to complete!!! I could've figured this out, got stuck on an earlier bug :(
+  }
   
   
   render(){
@@ -59,7 +60,7 @@ class App extends React.Component {
       <div>
         <Header />
         <SearchBar searchTerm={this.state.searchTerm} handleSearch={this.handleSearch}/>
-        <RandomButton/>
+        <RandomButton addNewPlaneteer={this.addNewPlaneteer}/>
         <PlaneteersContainer planeteersArray={ filteredArray }/>
       </div>
     );
