@@ -2,6 +2,7 @@ import React from 'react';
 
 const arrayOfPlaneteers = [
   {
+    id: 8,
     name: "Greta Thunberg",
     fromUSA: false,
     born: 2003,
@@ -11,6 +12,7 @@ const arrayOfPlaneteers = [
     twitter: "@GretaThunberg"
   },
   {
+    id: 9,
     name: "Thomas Tonatiuh Lopez",
     fromUSA: true,
     born: 1995,
@@ -20,6 +22,7 @@ const arrayOfPlaneteers = [
     twitter: "@tomvslopez"
   },
   {
+    id: 10,
     name: "Haven Coleman",
     fromUSA: true,
     born: 2006,
@@ -29,6 +32,7 @@ const arrayOfPlaneteers = [
     twitter: "@havenruthie"
   },
   {
+    id: 11,
     name: "Howey Ou",
     fromUSA: false,
     born: 2003,
@@ -44,7 +48,7 @@ class RandomButton extends React.Component {
 
   handleClick = () => {
     const randomPlaneteer = arrayOfPlaneteers[Math.floor(Math.random() * arrayOfPlaneteers.length)]
-    console.log(randomPlaneteer);
+    this.props.addOnePlaneteer(randomPlaneteer);
   }
 
   render() {
