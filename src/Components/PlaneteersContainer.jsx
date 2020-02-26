@@ -8,7 +8,9 @@ const PlaneteersContainer = (props) => {
   return (
     <ul className="cards">
       {
-       props.planeteers.map(planeteer => <Planeteer planeteer={planeteer} key={planeteer.id} />)
+       props.planeteers.map(planeteer => <Planeteer planeteer={planeteer} 
+                                                    key={planeteer.name + "-" + planeteer.id} 
+                                                    handleCardDelete={props.handleCardDelete}/>)
       }
     </ul>
   )

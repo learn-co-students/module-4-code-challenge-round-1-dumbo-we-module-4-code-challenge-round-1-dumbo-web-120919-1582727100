@@ -12,6 +12,10 @@ class Planeteer extends React.Component {
     })
   }
 
+  handleDelete = (planeteer) => {
+    this.props.handleCardDelete(planeteer)
+  }
+
   render() {
 
     const { planeteer } = this.props
@@ -27,6 +31,11 @@ class Planeteer extends React.Component {
                alt={planeteer.name} 
                className="card__image" 
                onClick={this.handleToggle} />
+          <div className="centered">
+            <button onClick={(e) => this.handleDelete(planeteer)} id="random-planeteer">
+              Click to Delete
+            </button>
+          </div>
           <div className="card__content">
             <div className="card__title">{planeteer.name}</div>
             <p className="card__text">{this.state.cardClicked ? planeteer.quote : planeteer.bio}</p>
