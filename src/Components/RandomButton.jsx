@@ -42,15 +42,17 @@ const arrayOfPlaneteers = [
 
 class RandomButton extends React.Component {
 
-  handleClick = () => {
+  handleClick = (e) => {
     const randomPlaneteer = arrayOfPlaneteers[Math.floor(Math.random() * arrayOfPlaneteers.length)]
-    console.log(randomPlaneteer);
+    this.props.addRandomPlaneteer(randomPlaneteer)
   }
+// going to send up to the parent. modify the original array with the spread operator, then rerender the stuff with an addRandomPlaneteer
+
 
   render() {
     return (
       <div className="centered">
-        <button onClick={this.handleClick} id="random-planeteer">
+        <button onClick={e => this.handleClick(e)} id="random-planeteer">
           Click to Add a Random Planeteer
         </button>
       </div>
