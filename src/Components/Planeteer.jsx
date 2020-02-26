@@ -1,7 +1,7 @@
 import React from 'react';
 
 class Planeteer extends React.Component {
-  state ={
+  state = {
     isClicked: true
   }
   //onclick switch value of isClicked
@@ -10,9 +10,13 @@ class Planeteer extends React.Component {
       isClicked: !prevState.isClicked
     }))
   }
+  //call delete function
+  handleDelete = () => {
+    this.props.deletePlaneteer(this.props.planeteer)
+  }
 
   render() {
-    let {name, fromUSA, born, bio, quote, pictureUrl, twitter} = this.props.planeteer
+    let { name, fromUSA, born, bio, quote, pictureUrl, twitter } = this.props.planeteer
     return (
       <li className="cards__item">
         <div className="card" onClick={this.handleClick}>
@@ -21,14 +25,16 @@ class Planeteer extends React.Component {
             <div className="card__title">{name}</div>
             <p className="card__text">{this.state.isClicked ?
               bio :
-              quote  
+              quote
             }</p>
             <div className="card__detail">
               <p>{twitter}</p>
               <p>Age: {2020 - born}</p>
               <p>{fromUSA ? "USA-based" : "working overseas"}</p>
             </div>
-            {/* DELIVERABLE 5 */}
+            <button onClick={this.handleDelete}>
+              Delete {name}
+            </button>
           </div>
         </div>
       </li>

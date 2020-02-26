@@ -7,7 +7,7 @@ const PlaneteersContainer = (props) => {
     <ul className="cards">
       {
         props.displayPlaneteers.map(planeteer =>{
-          return <Planeteer planeteer={planeteer} key={planeteer.id}/>
+          return <Planeteer planeteer={planeteer} key={planeteer.id} deletePlaneteer={props.deletePlaneteer}/>
         })
       }
     </ul>

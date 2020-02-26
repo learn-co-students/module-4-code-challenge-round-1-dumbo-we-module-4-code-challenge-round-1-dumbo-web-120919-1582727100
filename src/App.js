@@ -50,6 +50,7 @@ class App extends React.Component {
     return fetch('http://localhost:4000/planeteers', {
       'method': 'POST',
       'headers': {
+        'accept': 'application/json',
         'content-type': 'application/json'
       },
       'body': JSON.stringify(planeteer)
@@ -64,14 +65,61 @@ class App extends React.Component {
       searchTerm: ""
     })
   }
+  //delete planeteer from front and back
+  deletePlaneteer = planeteer => {
+    this.deletePlaneteerFromBack(planeteer)
+    .then(this.deletePlaneteerFromFront(planeteer))
+  }
+  //delete planeteer from backend
+  deletePlaneteerFromBack = planeteer => {
+    return fetch(`http://localhost:4000/planeteers/${planeteer.id}`, {
+      'method': 'DELETE'
+    })
+    .then(res => res.json())
+    .then(res=>console.log(res))
+  }
+  //delete planeteer from front end
+  deletePlaneteerFromFront = planeteer => {
+    let tempPlaneteers = this.state.planeteers.filter(eachPlan =>{
+      return !(eachPlan.id === planeteer.id)
+    })
+    this.setState({
+      planeteers: tempPlaneteers,
+      displayPlaneteers: tempPlaneteers,
+      searchTerm: ""
+    })
+  }
+  //sort planeteers by age
+  sort = () => {
+    let tempDisplay = this.state.displayPlaneteers
+    tempDisplay = tempDisplay.sort(function(a,b){
+      return b.born - a.born
+    })
+    console.log(tempDisplay)
+    this.setState({
+      displayPlaneteers: tempDisplay
+    })
+  }
+  //unsort planeteers
+  unsort = () => {
+    let tempDisplay = this.state.displayPlaneteers
+    tempDisplay = tempDisplay.sort(function(a,b){
+      return a.id - b.id
+    })
+    console.log(tempDisplay)
+    this.setState({
+      displayPlaneteers: tempDisplay
+    })
+  }
+
 
   render() {
     return (
       <div>
         <Header />
-        <SearchBar onSearchChange={this.onSearchChange} searchTerm={this.state.searchTerm} />
+        <SearchBar onSearchChange={this.onSearchChange} searchTerm={this.state.searchTerm} sort={this.sort} unsort={this.unsort}/>
         <RandomButton addPlaneteer={this.addPlaneteer} />
-        <PlaneteersContainer displayPlaneteers={this.state.displayPlaneteers} />
+        <PlaneteersContainer displayPlaneteers={this.state.displayPlaneteers} deletePlaneteer={this.deletePlaneteer}/>
       </div>
     );
   }
