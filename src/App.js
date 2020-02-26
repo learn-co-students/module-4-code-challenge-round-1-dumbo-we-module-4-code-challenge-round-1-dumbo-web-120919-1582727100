@@ -8,13 +8,59 @@ import SearchBar from './Components/SearchBar'
 
 class App extends React.Component {
 
+  state = {
+    planeteersArray: [],
+    searchTerm: ""
+  }
+
+  componentDidMount = () => {
+    fetch("http://localhost:4000/planeteers")
+      .then(r => r.json())
+      .then(data => {
+        this.setState({
+          planeteersArray: data
+        })
+      })
+  }
+
+  
+  
+  handleSearch = (string) => {
+    this.setState({
+      searchTerm: string
+    })
+  }
+
+  addNewPlaneteer = (newPlaneteer) => {
+    // take in array object from generated random planeteer
+    // pass the action up to app from random button component after click event on random button
+    // this data needs to be passed down from APP to render on the page
+    // fetch(//new planeteer, {
+      method: "POST",
+      headers: {
+        'content-type':'application/json'
+      },
+      body: JSON.stringify(newPlaneteer)
+    }),
+    this.setState({
+      planeteersArray: [...this.state.planeteersArray, newPlaneteer]
+    })
+    // running out of time to complete!!! I could've figured this out, got stuck on an earlier bug :(
+  
+  
   render(){
+
+    let filteredArray = this.state.planeteersArray.filter( planObj => {
+      return planObj.name.toLowerCase().includes(this.state.searchTerm)
+    })
+    
+    
     return (
       <div>
         <Header />
-        <SearchBar />
+        <SearchBar searchTerm={this.state.searchTerm} handleSearch={this.handleSearch}/>
         <RandomButton/>
-        <PlaneteersContainer />
+        <PlaneteersContainer planeteersArray={ filteredArray }/>
       </div>
     );
   }
