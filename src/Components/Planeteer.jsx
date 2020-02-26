@@ -12,6 +12,12 @@ class Planeteer extends React.Component {
     })
   }
 
+            /* DELIVERABLE 5 */
+  handleDelete = () => {
+
+  }
+              /* DELIVERABLE 5 */
+
   render() {
     return (
       <li className="cards__item">
@@ -26,6 +32,8 @@ class Planeteer extends React.Component {
               <p>{this.props.planeteer.fromUSA ? "USA-based" : "Working overseas"}</p>
             </div>
             {/* DELIVERABLE 5 */}
+              <button></button>
+            {/* {DELIVERABLE 5} */}
           </div>
         </div>
       </li>

@@ -53,7 +53,16 @@ class RandomButton extends React.Component {
     this.setState({
       planeteers: randomPlaneteer
     })
+    fetch('http://localhost:4000/planeteers', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(randomPlaneteer)
+    }
+    )
   }
+  
 
   render() {
     return (
