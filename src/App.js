@@ -35,17 +35,29 @@ class App extends React.Component {
     // take in array object from generated random planeteer
     // pass the action up to app from random button component after click event on random button
     // this data needs to be passed down from APP to render on the page
-    // fetch(//new planeteer, {
-    //   method: "POST",
-    //   headers: {
-    //     'content-type':'application/json'
-    //   },
-    //   body: JSON.stringify(newPlaneteer)
-    // }),
-    this.setState({
-      planeteersArray: [...this.state.planeteersArray, newPlaneteer]
+    fetch("http://localhost:4000/planeteers", {
+      method: "POST",
+      headers: {
+        'content-type':'application/json'
+      },
+      body: JSON.stringify(newPlaneteer)
     })
+      .then(r => r.json())
+      .then(newPlaneteer => {
+        this.setState({
+          planeteersArray: [...this.state.planeteersArray, newPlaneteer]
+        })
+      })
     // running out of time to complete!!! I could've figured this out, got stuck on an earlier bug :(
+  }
+
+  handleClick = (id) => {
+    let updatedArray = this.state.planeteersArray.filter(planObj => (planObj.id !== id))
+
+      this.setState({
+        planeteersArray: updatedArray
+      })
+    
   }
   
   
@@ -60,8 +72,8 @@ class App extends React.Component {
       <div>
         <Header />
         <SearchBar searchTerm={this.state.searchTerm} handleSearch={this.handleSearch}/>
-        <RandomButton addNewPlaneteer={this.addNewPlaneteer}/>
-        <PlaneteersContainer planeteersArray={ filteredArray }/>
+        <RandomButton addNewPlaneteer={this.addNewPlaneteer} planeteersArray={this.state.planeteersArray}/>
+        <PlaneteersContainer planeteersArray={filteredArray} handleClick={this.handleClick}/>
       </div>
     );
   }

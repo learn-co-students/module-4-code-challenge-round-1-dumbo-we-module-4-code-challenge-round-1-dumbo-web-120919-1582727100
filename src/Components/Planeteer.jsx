@@ -18,9 +18,9 @@ class Planeteer extends React.Component {
     
 
     return (
-      <li className="cards__item" onClick={this.handleClick}>
+      <li className="cards__item" >
         <div className="card">
-          <img src={ planeteer.pictureUrl } alt={ planeteer.name } className="card__image" />
+          <img src={ planeteer.pictureUrl } alt={ planeteer.name } className="card__image" onClick={this.handleClick}/>
           <div className="card__content">
             <div className="card__title">{ planeteer.name }</div>
             <p className="card__text">{ this.state.showBio ? planeteer.bio : planeteer.quote }</p>
@@ -29,7 +29,7 @@ class Planeteer extends React.Component {
               <p>Age: { currentYear - planeteer.born }</p>
               <p>{ planeteer.fromUSA ? "USA-based" : "Working Overseas" }</p>
             </div>
-            {/* DELIVERABLE 5 */}
+            <button onClick={() => this.props.handleClick(planeteer.id)}>Remove Me</button>
           </div>
         </div>
       </li>
